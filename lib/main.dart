@@ -44,18 +44,18 @@ class _MyAppState extends State<MyApp> {
     },
   ];
   int questionIndex = 0;
+  int totalScore = 0;
   void answerQuestion(int score) {
-    int totalScore += score;
-
-    void resetQuiz(){
-      setState((){
-        questionIndex = 0;
-        totalScore = 0;
-      })
-    }
-
+    totalScore += score;
     setState(() {
       questionIndex += 1;
+    });
+  }
+
+  void resetQuiz() {
+    setState(() {
+      questionIndex = 0;
+      totalScore = 0;
     });
   }
 
@@ -68,11 +68,11 @@ class _MyAppState extends State<MyApp> {
           title: Text('First Flutter App'),
         ),
         body: questionIndex < questions.length
-        ? Quiz(
-          answerQuestion: answerQuestion,
-          questionIndex: questionIndex,
-          questions: questions)
-        : Result(totalScore, resetQuiz),
+            ? Quiz(
+                answerQuestion: answerQuestion,
+                questionIndex: questionIndex,
+                questions: questions)
+            : Result(totalScore, resetQuiz),
       ),
     );
   }
