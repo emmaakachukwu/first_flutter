@@ -7,54 +7,40 @@ void main() => runApp(MyApp());
 
 class MyApp extends StatefulWidget {
   @override
-  State<StatefulWidget> createState(){
+  State<StatefulWidget> createState() {
     return _MyAppState();
   }
 }
 
-class _MyAppState extends State<Myapp> { // the underscore makes the class private
+class _MyAppState extends State<MyApp> {
+  // the underscore makes the class private
   int questionIndex = 0;
-  void answerQuestion(){
-    print('answer chosen for index ' + questionIndex);
-    setState((){
-      questionIndex += 1
-    })
+  void answerQuestion() {
+    setState(() {
+      questionIndex += 1;
+    });
   }
 
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     const questions = [
       {
-        'questiontext': 'Your favourite color?',
-        'answers': [
-          'black',
-          'red',
-          'green',
-          'white'
-        ]
+        'questionText': 'Your favourite color?',
+        'answers': ['black', 'red', 'green', 'white']
       },
       {
-        'questiontext': 'Your favourite animal?',
-        'answers': [
-          'cow',
-          'goat',
-          'snake',
-          'lion'
-        ]
+        'questionText': 'Your favourite animal?',
+        'answers': ['cow', 'goat', 'snake', 'lion']
       },
       {
-        'questiontext': 'Your favourite instructor?',
-        'answers': [
-          'qwe',
-          'qaz',
-          'qsc',
-          'abc'
-        ]
+        'questionText': 'Your favourite instructor?',
+        'answers': ['qwe', 'qaz', 'qsc', 'abc']
       },
     ];
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
+          backgroundColor: Colors.blueGrey,
           title: Text('First Flutter App'),
         ),
         body: Column(
@@ -62,8 +48,9 @@ class _MyAppState extends State<Myapp> { // the underscore makes the class priva
             Question(
               questions[questionIndex]['questionText'],
             ),
-            ...(questions[questionIndex]['answers'] as List<String>).map((answer){
-              return Answer(answerQuestion, answer)
+            ...(questions[questionIndex]['answers'] as List<String>)
+                .map((answer) {
+              return Answer(answerQuestion, answer);
             }).toList()
           ],
         ),
