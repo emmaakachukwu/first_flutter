@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: MyHomePage(),
     );
   }
 }
@@ -23,13 +23,13 @@ class MyHomePage extends StatelessWidget {
       id: 't1',
       title: 'New Shoes',
       amount: 89.90,
-      date: DateTime.now()
+      date: DateTime.now(),
     ),
     Transaction(
       id: 't2',
       title: 'New Stuffs',
       amount: 59.65,
-      date: DateTime.now()
+      date: DateTime.now(),
     ),
   ];
 
@@ -39,7 +39,7 @@ class MyHomePage extends StatelessWidget {
   final amountController = TextEditingController();
 
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Flutter Xpense App'),
@@ -56,24 +56,46 @@ class MyHomePage extends StatelessWidget {
               elevation: 5,
             ),
           ),
+          Card(
+            elevation: 3,
+            child: Container(
+              padding: EdgeInsets.all(10),
+              // width: double.infinity,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: <Widget>[
+                  TextField(
+                    decoration: InputDecoration(labelText: 'Title'),
+                    // onChanged: (value) => titleInput = value
+                    controller: titleController,
+                  ),
+                  TextField(
+                    decoration: InputDecoration(labelText: 'Amount'),
+                    // decoration: InputDecoration(labelText: 'Amount'),
+                    // onChanged: (val) => amountInput = val
+                    controller: amountController,
+                  ),
+                  FlatButton(
+                    child: Text('Add Transaction'),
+                    textColor: Colors.purple,
+                    onPressed: () {},
+                  )
+                ],
+              ),
+            ),
+          ),
           Column(
-            children: transactions.map((tx){
+            children: transactions.map((tx) {
               return Card(
                 child: Row(
                   children: <Widget>[
                     Container(
-                              decoration: InputDecoration(labelText: 'Title'),
-                              decoration: InputDecoration(labelText: 'Title'),
-                      margin: EdgeInsets.symmetric(
-                        vertical: 10,
-                        horizontal: 15
-                      ),
+                      // decoration: InputDecoration(labelText: 'Title'),
+                      // decoration: InputDecoration(labelText: 'Title'),
+                      margin:
+                          EdgeInsets.symmetric(vertical: 10, horizontal: 15),
                       decoration: BoxDecoration(
-                        border: Border.all(
-                          color: Colors.black,
-                          width: 1
-                        )
-                      ),
+                          border: Border.all(color: Colors.black, width: 1)),
                       padding: EdgeInsets.all(10),
                       child: Text(
                         '\$${tx.amount}',
@@ -81,33 +103,6 @@ class MyHomePage extends StatelessWidget {
                           fontWeight: FontWeight.bold,
                           fontSize: 20,
                           color: Colors.purple,
-                        ),
-                      )
-                    ),
-                    Card(
-                      elevation: 3,
-                      child: Container(
-                        padding: EdgeInsets.all(10),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: <Widget>[
-                            TextField(
-                              decoration: InputDecoration(labelText: 'Title'),
-                              // onChanged: (value) => titleInput = value
-                              controller: titleController,
-                            ),
-                            TextField(
-                              decoration: InputDecoration(labelText: 'Title'),
-                              decoration: InputDecoration(labelText: 'Amount'),
-                              // onChanged: (val) => amountInput = val
-                              controller: amountController,
-                            ),
-                            FlatButton(
-                              child: Text('Add Transaction'),
-                              textColor: Colors.purple,
-                              onPressed: (){}
-                            )
-                          ]
                         ),
                       ),
                     ),
@@ -118,24 +113,22 @@ class MyHomePage extends StatelessWidget {
                           tx.title,
                           style: TextStyle(
                             fontSize: 18,
-                            fontWeight: FontWeight.bold
-                          )
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                         Text(
                           DateFormat.yMMMd().format(tx.date),
-                          style: TextStyle(
-                            color: Colors.grey
-                          )
-                        )
-                      ]
-                    )
-                  ]
-                )
-              )
+                          style: TextStyle(color: Colors.grey),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              );
             }).toList(),
           )
-        ]
-      )
-    )
+        ],
+      ),
+    );
   }
 }
